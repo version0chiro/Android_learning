@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     boolean gameOver= true;
                     for (int counterState:gameState){
-                        if (counterState==2) gameOver=true;
+                        if (counterState==2) gameOver=false;
                     }
                     if (gameOver){
                         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
