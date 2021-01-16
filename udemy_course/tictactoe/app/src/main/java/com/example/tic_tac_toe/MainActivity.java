@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     //0 is yellow ,1 is red
     int activePlayer = 0;
+    boolean gameActive = true;
     String[] players = {"Yellow","Red"};
     int[] gameState= {2,2,2,2,2,2,2,2,2};
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public  void playAgain(View view){
+        gameActive=true;
         LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
         layout.setVisibility(View.INVISIBLE);
 
@@ -44,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView counter = (ImageView) view;
         String tag =  counter.getTag().toString();
         int tappedCounter = Integer.parseInt(tag);
-        if (gameState[tappedCounter]==2) {
+        if (gameActive && gameState[tappedCounter]==2) {
             gameState[tappedCounter]=activePlayer;
             counter.setTranslationY(-1000f);
+
             if (activePlayer == 0) {
                 counter.setImageResource(R.drawable.yellow);
 
@@ -65,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
                     TextView winnerMessage = (TextView) findViewById(R.id.winMessage);
                     winnerMessage.setText("Player "+players[activePlayer]+" has won!");
                     layout.setVisibility(View.VISIBLE);
+                    gameActive=false;
+                }
+                else {
+                    boolean gameOver= true;
+                    for (int counterState:gameState){
+                        if (counterState==2) gameOver=true;
+                    }
+                    if (gameOver){
+                        LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
+
+                        TextView winnerMessage = (TextView) findViewById(R.id.winMessage);
+                        winnerMessage.setText("It was a draw!");
+                        layout.setVisibility(View.VISIBLE);
+
+                    }
                 }
             }
         }
