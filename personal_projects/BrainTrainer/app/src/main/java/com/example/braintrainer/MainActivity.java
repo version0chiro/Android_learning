@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     int rightAnswer;
     Random rand;
     TextView answer;
+    String sumString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void generateSum(){
-        rightAnswer = rand.nextInt(100);
+        rightAnswer = rand.nextInt(100)+1;
         int firstDigit = rand.nextInt(rightAnswer);
         int secondDigit = rightAnswer - firstDigit;
-        String sumString = Integer.toString(firstDigit) + "+" + Integer.toString(secondDigit);
+        sumString = Integer.toString(firstDigit) + "+" + Integer.toString(secondDigit);
         int rightOption = rand.nextInt(4)+1;
         List<Integer> options = new ArrayList<Integer>();
         for (int i =1;i<5;i++){
@@ -83,17 +84,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
         else{
-            Button startButton = (Button) findViewById(R.id.Start);            startButton.setVisibility(View.VISIBLE);
-            GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
-            gridLayout.setVisibility(View.GONE);
-            timer = (TextView) findViewById(R.id.timer);
-            timer.setVisibility(View.GONE);
-            score = (TextView) findViewById(R.id.score);
-            score.setVisibility(View.GONE);
-            sum = (TextView) findViewById(R.id.sum);
-            sum.setVisibility(View.GONE);
-            answer = (TextView) findViewById(R.id.answer);
-            answer.setVisibility(View.GONE);
+//            Button startButton = (Button) findViewById(R.id.Start);            startButton.setVisibility(View.VISIBLE);
+//            GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+//            gridLayout.setVisibility(View.GONE);
+//            timer = (TextView) findViewById(R.id.timer);
+//            timer.setVisibility(View.GONE);
+//            score = (TextView) findViewById(R.id.score);
+//            score.setVisibility(View.GONE);
+//            sum = (TextView) findViewById(R.id.sum);
+//            sum.setVisibility(View.GONE);
+//            answer = (TextView) findViewById(R.id.answer);
+              answer.setVisibility(View.GONE);
+              Button playAgain = (Button) findViewById(R.id.button2);
+              TextView summary = (TextView) findViewById(R.id.scoreSummary);
+              summary.setText(sumString);
+              summary.setVisibility(View.VISIBLE);
+              playAgain.setVisibility(View.VISIBLE);
         }
     }
 
@@ -114,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                timer.setText(Integer.toString((int) TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)));
+                timer.setText(Integer.toString((int) TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished))  +"s");
             }
 
             @Override
