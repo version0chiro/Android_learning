@@ -37,6 +37,8 @@
             android:layout_height="185dp"
             android:background="#6767F3"
             android:gravity="center"
+            android:onClick="submitAnswer"
+            android:tag="option1"
             android:text="TextView"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -48,6 +50,8 @@
             android:background="#8CF367"
             android:gravity="center"
             android:text="TextView"
+            android:onClick="submitAnswer"
+            android:tag="option2"
             android:textSize="36sp"
             android:textStyle="bold"
             app:layout_column="1"
@@ -59,6 +63,8 @@
             android:layout_height="185dp"
             android:background="#CB66DD"
             android:gravity="center"
+            android:onClick="submitAnswer"
+            android:tag="option3"
             android:text="TextView"
             android:textSize="36sp"
             android:textStyle="bold"
@@ -72,22 +78,25 @@
             android:background="#67D7F3"
             android:gravity="center"
             android:text="TextView"
+            android:onClick="submitAnswer"
+            android:tag="option4"
             android:textSize="36sp"
             android:textStyle="bold" />
     </androidx.gridlayout.widget.GridLayout>
 
     <TextView
         android:id="@+id/answer"
-        android:layout_width="138dp"
-        android:layout_height="60dp"
+        android:layout_width="317dp"
+        android:layout_height="190dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="Choose The correct answer!"
         android:textSize="30sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        app:layout_constraintVertical_bias="0.833" />
 
     <TextView
         android:id="@+id/timer"
@@ -95,7 +104,7 @@
         android:layout_height="71dp"
         android:background="#FFEB3B"
         android:gravity="center"
-        android:text="TextView"
+        android:text="30"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toStartOf="@+id/sum"
@@ -110,7 +119,7 @@
         android:layout_height="71dp"
         android:background="#FF5722"
         android:gravity="center"
-        android:text="TextView"
+        android:text="0/0"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,5 +139,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreSummary"
+        android:layout_width="129dp"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:text="Score"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Start"
+        app:layout_constraintVertical_bias="0.318" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreSummary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
