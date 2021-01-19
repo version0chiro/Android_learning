@@ -148,17 +148,17 @@ public class MainActivity extends AppCompatActivity {
         int diceRoll = random.nextInt(50);
         int rightOption = random.nextInt(4)+1;
         String url = urlStrings.get(diceRoll);
-        correctAns = nameStrings.get(diceRoll);
+        correctAns = (nameStrings.get(diceRoll).split(" ")[0]+nameStrings.get(diceRoll).split(" ")[1]);
         url = url.substring(1,url.length());
         Bitmap myImage;
         List<String> options = new ArrayList<>();
-        for(int i =0;i<4;i++){
+        for(int i =1;i<5;i++){
             int randomOption= random.nextInt(50);
             if(i==rightOption){
                 options.add(correctAns);
             }
             else if(randomOption!= diceRoll){
-                options.add(nameStrings.get(randomOption));
+                options.add((nameStrings.get(randomOption).split(" ")[0]+nameStrings.get(randomOption).split(" ")[1]));
             }
             else{
                 i--;
@@ -166,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        button1.setText((options.get(0)));
-        button2.setText((options.get(1)));
-        button3.setText((options.get(2)));
-        button4.setText((options.get(3)));
+        button1.setText((options.get(0).substring(1,options.get(0).length()-1)));
+        button2.setText((options.get(1).substring(1,options.get(1).length()-1)));
+        button3.setText((options.get(2).substring(1,options.get(2).length()-1)));
+        button4.setText((options.get(3).substring(1,options.get(3).length()-1)));
         ImageDownloader task = new ImageDownloader();
         try{
             myImage = task.execute(url).get();
@@ -200,5 +200,8 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        updateImage();
+
     }
 }
