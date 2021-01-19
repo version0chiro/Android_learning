@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Go(View view) {
+        answer = "";
         city= cityLabel.getText().toString();
             city = city.toLowerCase();
 
