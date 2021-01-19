@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button button3;
     Button button4;
+    TextView winLabel;
     ImageView img;
     String correctAns;
     List<String> urlStrings = new ArrayList<>();
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         button3 = (Button) findViewById(R.id.option3);
         button4 = (Button) findViewById(R.id.option4);
         img = (ImageView) findViewById(R.id.imageView);
+        winLabel = (TextView) findViewById(R.id.winLabel);
         DownloadHtml htmlTask = new DownloadHtml();
         String results = null;
         try{
@@ -192,8 +195,10 @@ public class MainActivity extends AppCompatActivity {
             String submittedAnswer = (String) pressedButton.getText();
             if(submittedAnswer==correctAns){
                 Toast.makeText(this, "Right Answer", Toast.LENGTH_LONG).show();
+                winLabel.setText("Right Answer!");
             }
             else{
+                winLabel.setText("Wrong Answer, Correct answer is "+ correctAns);
                 Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns, Toast.LENGTH_LONG).show();
             }
 
