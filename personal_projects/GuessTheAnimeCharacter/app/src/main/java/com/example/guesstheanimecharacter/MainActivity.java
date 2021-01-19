@@ -162,7 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 options.add(correctAns);
             }
             else if(randomOption!= diceRoll){
-                options.add((nameStrings.get(randomOption).split(" ")[0]+" "+nameStrings.get(randomOption).split(" ")[1]));
+                String temp =nameStrings.get(randomOption).split(" ")[0]+" "+nameStrings.get(randomOption).split(" ")[1];
+                temp = temp.substring(1);
+                options.add((temp));
             }
             else{
                 i--;
