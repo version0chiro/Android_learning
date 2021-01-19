@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         int diceRoll = random.nextInt(50);
         int rightOption = random.nextInt(4)+1;
         String url = urlStrings.get(diceRoll);
-        correctAns = (nameStrings.get(diceRoll).split(" ")[0]+nameStrings.get(diceRoll).split(" ")[1]);
+        correctAns = (nameStrings.get(diceRoll).split(" ")[0]+" "+nameStrings.get(diceRoll).split(" ")[1]);
         url = url.substring(1,url.length());
         Bitmap myImage;
         List<String> options = new ArrayList<>();
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 options.add(correctAns);
             }
             else if(randomOption!= diceRoll){
-                options.add((nameStrings.get(randomOption).split(" ")[0]+nameStrings.get(randomOption).split(" ")[1]));
+                options.add((nameStrings.get(randomOption).split(" ")[0]+" "+nameStrings.get(randomOption).split(" ")[1]));
             }
             else{
                 i--;
