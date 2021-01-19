@@ -170,10 +170,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        button1.setText((options.get(0).substring(1,options.get(0).length())));
-        button2.setText((options.get(1).substring(1,options.get(1).length())));
-        button3.setText((options.get(2).substring(1,options.get(2).length())));
-        button4.setText((options.get(3).substring(1,options.get(3).length())));
+        button1.setText((options.get(0)));
+        button2.setText((options.get(1)));
+        button3.setText((options.get(2)));
+        button4.setText((options.get(3)));
         ImageDownloader task = new ImageDownloader();
         try{
             myImage = task.execute(url).get();
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 winLabel.setText("Right Answer!");
             }
             else{
-                winLabel.setText("Wrong Answer, Correct answer is ");
+                winLabel.setText("Length of submission"+Integer.toString(submittedAnswer.length())+":"+Integer.toString(correctAns.length()));
                 Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns, Toast.LENGTH_LONG).show();
             }
 
