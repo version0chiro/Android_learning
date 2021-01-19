@@ -169,10 +169,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        button1.setText((options.get(0).substring(1,options.get(0).length()-1)));
-        button2.setText((options.get(1).substring(1,options.get(1).length()-1)));
-        button3.setText((options.get(2).substring(1,options.get(2).length()-1)));
-        button4.setText((options.get(3).substring(1,options.get(3).length()-1)));
+        button1.setText((options.get(0).substring(1,options.get(0).length())));
+        button2.setText((options.get(1).substring(1,options.get(1).length())));
+        button3.setText((options.get(2).substring(1,options.get(2).length())));
+        button4.setText((options.get(3).substring(1,options.get(3).length())));
         ImageDownloader task = new ImageDownloader();
         try{
             myImage = task.execute(url).get();
@@ -193,13 +193,14 @@ public class MainActivity extends AppCompatActivity {
         try{
             Button pressedButton = (Button) view;
             String submittedAnswer = (String) pressedButton.getText();
-            if(submittedAnswer==correctAns){
+
+            if(submittedAnswer==correctAns.substring(1)){
                 Toast.makeText(this, "Right Answer", Toast.LENGTH_LONG).show();
                 winLabel.setText("Right Answer!");
             }
             else{
-                winLabel.setText("Wrong Answer, Correct answer is "+ correctAns);
-                Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns, Toast.LENGTH_LONG).show();
+                winLabel.setText("Wrong Answer, Correct answer is "+ correctAns.substring(1));
+                Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns.substring(1), Toast.LENGTH_LONG).show();
             }
 
         } catch (Exception e){
