@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 winLabel.setText("Right Answer!");
             }
             else{
-                winLabel.setText("Length of submission"+Integer.toString(submittedAnswer.length())+":"+Integer.toString(correctAns.length()));
+                winLabel.setText("Wrong Answer, Correct answer is "+ correctAns);
                 Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns, Toast.LENGTH_LONG).show();
             }
 
