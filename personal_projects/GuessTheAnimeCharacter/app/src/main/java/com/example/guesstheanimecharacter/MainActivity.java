@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         int rightOption = random.nextInt(4)+1;
         String url = urlStrings.get(diceRoll);
         correctAns = (nameStrings.get(diceRoll).split(" ")[0]+" "+nameStrings.get(diceRoll).split(" ")[1]);
+        correctAns = correctAns.substring(1);
         url = url.substring(1,url.length());
         Bitmap myImage;
         List<String> options = new ArrayList<>();
@@ -193,14 +194,14 @@ public class MainActivity extends AppCompatActivity {
         try{
             Button pressedButton = (Button) view;
             String submittedAnswer = (String) pressedButton.getText();
-
-            if(submittedAnswer==correctAns.substring(1)){
+            System.out.println(submittedAnswer);
+            if(submittedAnswer==correctAns){
                 Toast.makeText(this, "Right Answer", Toast.LENGTH_LONG).show();
                 winLabel.setText("Right Answer!");
             }
             else{
-                winLabel.setText("Wrong Answer, Correct answer is "+ correctAns.substring(1));
-                Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns.substring(1), Toast.LENGTH_LONG).show();
+                winLabel.setText("Wrong Answer, Correct answer is ");
+                Toast.makeText(this, "Wrong Answer, Correct answer is "+ correctAns, Toast.LENGTH_LONG).show();
             }
 
         } catch (Exception e){
