@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void displayVibrateButton() {
+        connect.setVisibility(View.GONE);
         cliOutput.setVisibility(View.VISIBLE);
         label1.setVisibility(View.VISIBLE);
         label2.setVisibility(View.VISIBLE);
