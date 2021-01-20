@@ -81,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
         vibratingPattern= new VibratingPattern();
     }
 
-    private void displayInitConnectButton() {
-        connect.setVisibility(View.VISIBLE);
-    }
+
 
     class VibratingPattern implements Runnable {
         private int minVibration = 40;
@@ -256,9 +254,18 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void toastMessage(String s) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    private void displayInitConnectButton() {
+        connect.setVisibility(View.VISIBLE);
+        connect.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initBluetoothHandler();
+                    }
+                }
+        );
     }
+
 
     private void displayInitialUI() {
         displayReconnectUI();
@@ -269,6 +276,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "button pressed", Toast.LENGTH_SHORT).show();
     }
 
+    private void toastMessage(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
 
     //////////////////////////////////////////////
     // Bluetooth and permissions initialization //
