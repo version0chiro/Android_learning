@@ -201,8 +201,7 @@ public class MainActivity extends AppCompatActivity {
         heartrateTag.setVisibility(View.VISIBLE);
         insightTag.setVisibility(View.VISIBLE);
         temperatureTag.setVisibility(View.VISIBLE);
-        connect.setVisibility(View.VISIBLE);
-
+        instruction.setVisibility(View.GONE);
     }
 
     private void displayDisconnectUI() {
