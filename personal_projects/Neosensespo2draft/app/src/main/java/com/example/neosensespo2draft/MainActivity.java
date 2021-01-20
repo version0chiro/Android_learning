@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,8 +19,17 @@ import android.widget.Toast;
 
 import com.neosensory.neosensoryblessed.NeosensoryBlessed;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
@@ -48,6 +58,60 @@ public class MainActivity extends AppCompatActivity {
     Runnable vibratingPattern;
     Thread vibratingPatternThread;
 
+    // class for downloading the json data from the node.js server
+    public class  WeatherDownloader extends AsyncTask<String,Void,String>{
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try{
+                JSONObject jsonObject = new JSONObject(s);
+                String spo2 = jsonObject.getString("spo2");
+                spooTag.setText(spo2);
+                String hr = jsonObject.getString("hr");
+                heartrateTag.setText(hr);
+                String temperature = jsonObject.getString("temperature");
+                temperatureTag.setText(temperature);
+                String insight = jsonObject.getString("insight");
+                insightTag.setText(insight);
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String results="";
+            URL url;
+
+            HttpsURLConnection urlConnection = null;
+
+            try {
+                url = new URL(strings[0]);
+
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                InputStream reader = urlConnection.getInputStream();
+
+                int data = reader.read();
+
+                while(data!=-1){
+                    char current = (char)data;
+                    results += current;
+                    data = reader.read();
+
+                }
+                return results;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +164,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("Tag",String.valueOf(motorID));
                     Log.i("max amp", String.valueOf(NeosensoryBlessed.MAX_VIBRATION_AMP));
 
-                    Thread.sleep(1000);
+                    Thread.sleep(2500);
+                    WeatherDownloader task = new WeatherDownloader();
+
+                    task.execute("https://spo2-registration.herokuapp.com/neoSenseSender");
+
                     int[] motorPattern = new int[4];
                     motorPattern = new int[]{10, 40, 0, 100};
 //                    motorPattern[motorID] = currentVibration;
@@ -245,6 +313,7 @@ public class MainActivity extends AppCompatActivity {
         disconnect.setVisibility(View.GONE);
         start.setVisibility(View.GONE);
         connect.setVisibility(View.VISIBLE);
+        instruction.setVisibility(View.VISIBLE);
         connect.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
