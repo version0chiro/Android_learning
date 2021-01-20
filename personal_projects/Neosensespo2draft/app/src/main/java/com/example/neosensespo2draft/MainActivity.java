@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Thread.sleep(150);
                     int[] motorPattern = new int[4];
-                    motorPattern[motorID] = currentVibration;
+                    motorPattern[motorID] = 0;
                     blessedNeo.vibrateMotors(motorPattern);
                     motorID = (motorID + 1) % NUM_MOTORS;
                     currentVibration = (currentVibration + 1) % NeosensoryBlessed.MAX_VIBRATION_AMP;
