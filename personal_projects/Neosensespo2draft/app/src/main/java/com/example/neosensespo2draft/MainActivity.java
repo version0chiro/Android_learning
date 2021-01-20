@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.neosensory.neosensoryblessed.NeosensoryBlessed;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
     private final String TAG = MainActivity.class.getSimpleName();
 
@@ -93,12 +96,17 @@ public class MainActivity extends AppCompatActivity {
             int motorID = 0;
             while (!Thread.currentThread().isInterrupted() && vibrating) {
                 try {
+                    Log.i("Vibration", String.valueOf(currentVibration) + "in motor "+String.valueOf(motorID));
+                    Log.i("Tag",String.valueOf(motorID));
+                    Log.i("max amp", String.valueOf(NeosensoryBlessed.MAX_VIBRATION_AMP));
 
-                    Thread.sleep(150);
+                    Thread.sleep(1000);
                     int[] motorPattern = new int[4];
-                    motorPattern[motorID] = currentVibration;
+                    motorPattern = new int[]{10, 40, 0, 100};
+//                    motorPattern[motorID] = currentVibration;
                     blessedNeo.vibrateMotors(motorPattern);
-                    motorID = (motorID + 1) % NUM_MOTORS;
+                    motorID = (motorID + 1) % 3;
+                    Log.i("array", Arrays.toString(motorPattern));
                     currentVibration = (currentVibration + 1) % NeosensoryBlessed.MAX_VIBRATION_AMP;
                     if (currentVibration == 0) {
                         currentVibration = minVibration;
