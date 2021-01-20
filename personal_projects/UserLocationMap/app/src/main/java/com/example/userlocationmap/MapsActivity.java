@@ -79,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.i("Location Change ",location.toString());
                 lat= (float) location.getLatitude();
                 lan= (float) location.getLongitude();
+                mMap.clear();
                 // Add a marker in Sydney and move the camera
                 mMap = googleMap;
 
@@ -95,6 +96,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             else {
                 locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER,0,0,locationListener);
+
+                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                lat= (float) lastKnownLocation.getLatitude();
+                lan= (float) lastKnownLocation.getLongitude();
+                // Add a marker in Sydney and move the camera
+                mMap = googleMap;
+
+                LatLng sydney = new LatLng(lat, lan);
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
             }
         }
 
