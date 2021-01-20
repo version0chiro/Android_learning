@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button connect;
     TextView instruction;
     //after connect
-    Button disconnect;
+    Button disconnect,start;
     TextView label1,label2,label3,label4,cliOutput;
     TextView spooTag,temperatureTag,heartrateTag,insightTag;
 
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         insightTag = (TextView) findViewById(R.id.insightTag);
         //button post connect
         disconnect = (Button) findViewById(R.id.button2);
-
+        start = (Button) findViewById(R.id.button3);
 
         displayInitialUI();
 
@@ -88,13 +88,15 @@ public class MainActivity extends AppCompatActivity {
         private int currentVibration = minVibration;
 
         public void run() {
+
             // loop until the thread is interrupted
             int motorID = 0;
             while (!Thread.currentThread().isInterrupted() && vibrating) {
                 try {
+
                     Thread.sleep(150);
                     int[] motorPattern = new int[4];
-                    motorPattern[motorID] = 0;
+                    motorPattern[motorID] = currentVibration;
                     blessedNeo.vibrateMotors(motorPattern);
                     motorID = (motorID + 1) % NUM_MOTORS;
                     currentVibration = (currentVibration + 1) % NeosensoryBlessed.MAX_VIBRATION_AMP;
@@ -207,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayDisconnectUI() {
         disconnect.setVisibility(View.VISIBLE);
         disconnect.setClickable(true);
+        start.setVisibility(View.VISIBLE);
         disconnect.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
@@ -232,49 +235,51 @@ public class MainActivity extends AppCompatActivity {
         label4.setVisibility(View.GONE);
 
         disconnect.setVisibility(View.GONE);
+        start.setVisibility(View.GONE);
         connect.setVisibility(View.VISIBLE);
         connect.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
                         blessedNeo.attemptNeoReconnect();
                         toastMessage("Attempting to reconnect. This may take a few seconds.");
-                        if (!vibrating) {
-                            blessedNeo.pauseDeviceAlgorithm();
-                            toastMessage("Stop Vibration Pattern");
-                            vibrating = true;
-                            // run the vibrating pattern loop
-                            vibratingPatternThread = new Thread(vibratingPattern);
-                            vibratingPatternThread.start();
-                        } else {
-                            toastMessage("Start Vibration Pattern");
-                            vibrating = false;
-                            blessedNeo.resumeDeviceAlgorithm();
-                        }
                     }
                 });
     }
 
     private void displayInitConnectButton() {
         connect.setVisibility(View.VISIBLE);
+        connect.setClickable(true);
         connect.setOnClickListener(
                 new View.OnClickListener() {
-                    @Override
                     public void onClick(View v) {
                         initBluetoothHandler();
                     }
-                }
-        );
+                });
     }
 
 
     private void displayInitialUI() {
         displayReconnectUI();
-
+        start.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        if (!vibrating) {
+                            blessedNeo.pauseDeviceAlgorithm();
+                            start.setText("Stop");
+                            vibrating = true;
+                            // run the vibrating pattern loop
+                            vibratingPatternThread = new Thread(vibratingPattern);
+                            vibratingPatternThread.start();
+                        } else {
+                            start.setText("Start");
+                            vibrating = false;
+                            blessedNeo.resumeDeviceAlgorithm();
+                        }
+                    }
+                }
+        );
     }
 
-    public void connect(View view) {
-        Toast.makeText(this, "button pressed", Toast.LENGTH_SHORT).show();
-    }
 
     private void toastMessage(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();

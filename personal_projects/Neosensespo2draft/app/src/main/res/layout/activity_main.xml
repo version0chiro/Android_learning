@@ -109,7 +109,6 @@
         android:background="@drawable/ic_launcher_background"
         android:backgroundTint="#971313"
         android:backgroundTintMode="src_atop"
-        android:onClick="connect"
         android:text="Connect!"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,12 +134,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Disconnect"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.932" />
+        app:layout_constraintVertical_bias="0.942" />
 
     <TextView
         android:id="@+id/label3"
@@ -187,5 +187,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintVertical_bias="0.847" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="122dp"
+        android:layout_height="44dp"
+        android:text="Start!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
