@@ -163,7 +163,7 @@
         android:layout_width="91dp"
         android:layout_height="43dp"
         android:gravity="center"
-        android:text="Insight:"
+        android:text="HRV:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#F8EEEE"
         android:visibility="gone"

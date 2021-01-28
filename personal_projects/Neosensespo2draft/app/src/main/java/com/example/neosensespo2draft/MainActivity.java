@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     //after connect
     Button disconnect,start;
     TextView label1,label2,label3,label4,cliOutput;
-    TextView spooTag,temperatureTag,heartrateTag,insightTag;
+    TextView spooTag,temperatureTag,heartrateTag,hrvTag;
 
     // Constants
     private static final int ACCESS_LOCATION_REQUEST = 2;
@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 heartrateTag.setText(hr);
                 String temperature = jsonObject.getString("temperature");
                 temperatureTag.setText(temperature);
-                String insight = jsonObject.getString("insight");
-                insightTag.setText(insight);
+                String insight = jsonObject.getString("hrv");
+                hrvTag.setText(insight);
 
 
             } catch (JSONException e) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         spooTag = (TextView) findViewById(R.id.spooTag);
         heartrateTag = (TextView) findViewById(R.id.heartrateTag);
         temperatureTag = (TextView) findViewById(R.id.temperatureTag);
-        insightTag = (TextView) findViewById(R.id.insightTag);
+        hrvTag = (TextView) findViewById(R.id.insightTag);
         //button post connect
         disconnect = (Button) findViewById(R.id.button2);
         start = (Button) findViewById(R.id.button3);
@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
         label4.setVisibility(View.VISIBLE);
         spooTag.setVisibility(View.VISIBLE);
         heartrateTag.setVisibility(View.VISIBLE);
-        insightTag.setVisibility(View.VISIBLE);
+        hrvTag.setVisibility(View.VISIBLE);
         temperatureTag.setVisibility(View.VISIBLE);
         instruction.setVisibility(View.GONE);
     }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hills"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="190dp"
+        android:layout_height="23dp"
+        android:text="Lattitude:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.103" />
+
+    <TextView
+        android:id="@+id/longi"
+        android:layout_width="194dp"
+        android:layout_height="28dp"
+        android:text="Longitude:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lat"
+        app:layout_constraintVertical_bias="0.069" />
+
+    <TextView
+        android:id="@+id/acc"
+        android:layout_width="201dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="40dp"
+        android:text="Accuracy:"
+        app:layout_constraintBottom_toTopOf="@+id/alt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longi"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <TextView
+        android:id="@+id/alt"
+        android:layout_width="205dp"
+        android:layout_height="19dp"
+        android:text="Altitude:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.104"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longi"
+        app:layout_constraintVertical_bias="0.201" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="101dp"
+        android:layout_height="158dp"
+        android:text="Address:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alt"
+        app:layout_constraintVertical_bias="0.107" />
+</androidx.constraintlayout.widget.ConstraintLayout>

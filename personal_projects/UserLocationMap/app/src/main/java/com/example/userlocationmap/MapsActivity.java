@@ -1,3 +1,4 @@
+
 package com.example.userlocationmap;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +25,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -71,22 +78,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        locationListener = new LocationListener() {
-
-            @Override
-            public void onLocationChanged(@NonNull Location location) {
+        locationListener = location -> {
 //                Toast.makeText(MapsActivity.this, location.toString(), Toast.LENGTH_SHORT).show();
-                Log.i("Location Change ",location.toString());
-                lat= (float) location.getLatitude();
-                lan= (float) location.getLongitude();
-                mMap.clear();
-                // Add a marker in Sydney and move the camera
-                mMap = googleMap;
+            Log.i("Location Change ",location.toString());
+            lat= (float) location.getLatitude();
+            lan= (float) location.getLongitude();
+            mMap.clear();
+            // Add a marker in Sydney and move the camera
+            mMap = googleMap;
 
-                LatLng sydney = new LatLng(lat, lan);
-                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng sydney = new LatLng(lat, lan);
+            mMap.addMarker(new MarkerOptions().position(sydney).title("user location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+            try {
+                List<Address> listAddress = geocoder.getFromLocation(lat,lan,1);
+                if (listAddress!=null && listAddress.size()>0){
+                    Log.i("place info",listAddress.get(0).toString());
+                    Toast.makeText(MapsActivity.this, listAddress.get(0).getAddressLine(0), Toast.LENGTH_SHORT).show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+
         };
 
 
@@ -105,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 LatLng sydney = new LatLng(lat, lan);
                 mMap.clear();
-                mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                mMap.addMarker(new MarkerOptions().position(sydney).title("user location"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
             }
