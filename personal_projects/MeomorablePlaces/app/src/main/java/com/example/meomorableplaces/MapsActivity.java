@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -178,6 +179,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MainActivity.locations.add(latLng);
 
         MainActivity.arrayAdapter.notifyDataSetChanged();
+
+        try {
+            MainActivity.sharedPreferences.edit().putString("places",ObjectSerializer.serialize(MainActivity.places)).apply();
+            ArrayList<String> latitudes = new ArrayList<>();
+            ArrayList<String> longitudes = new ArrayList<>();
+
+            for (LatLng coordinates : MainActivity.locations){
+                latitudes.add(Double.toString(coordinates.latitude));
+                longitudes.add(Double.toString(coordinates.longitude));
+            }
+
+            MainActivity.sharedPreferences.edit().putString("latitudes",ObjectSerializer.serialize(latitudes)).apply();
+            MainActivity.sharedPreferences.edit().putString("longitudes",ObjectSerializer.serialize(longitudes)).apply();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Toast.makeText(this, "Loaction Saved", Toast.LENGTH_SHORT).show();
     }
